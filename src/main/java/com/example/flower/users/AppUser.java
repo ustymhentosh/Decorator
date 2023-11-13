@@ -26,6 +26,12 @@ public class AppUser {
     private LocalDate dob;
     private int age;
 
+    public AppUser(AppUser user) {
+        this.email = user.email;
+        this.dob = user.dob;
+        this.age = user.age;
+    }
+
     public int getAge() {
         if (dob == null) {
             return 0; // Or handle the null case as needed
@@ -34,11 +40,5 @@ public class AppUser {
         LocalDate currentDate = LocalDate.now();
         Period period = Period.between(dob, currentDate);
         return period.getYears();
-    }
-
-    public AppUser(AppUser user) {
-        this.email = user.email;
-        this.dob = user.dob;
-        this.age = user.age;
     }
 }
