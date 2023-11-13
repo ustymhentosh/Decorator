@@ -17,3 +17,18 @@ GET http://localhost:8080/api/flowers/payment
 
 ###
 GET http://localhost:8080/api/flowers/delivery
+
+###
+GET http://localhost:8080/api/users/list
+
+
+###
+POST http://localhost:8080/api/users/add
+Content-Type: application/json
+
+{
+  "id": 2,
+  "email": "you@gmail.com",
+  "dob": "2017-01-13",
+  "age": 11
+}
