@@ -10,10 +10,10 @@
     <!-- Checks that property files contain the same keys. -->
     <module name="Translation"/>
 
-    <module name="SuppressionFilter">
-        <property name="file" value=".github\linters\mysuppressions.xml" />
-    </module>
 
+    <module name="BeforeExecutionExclusionFileFilter">
+        <property name="fileNamePattern" value=".md$"/>
+    </module>
 
     <!-- Checks that no tab characters in the source code. -->
     <!-- Reports only first instance. -->
