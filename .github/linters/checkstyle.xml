@@ -11,7 +11,7 @@
     <module name="Translation"/>
 
     <module name="SuppressionFilter">
-        <property name="file" value="mysuppressions.xml" />
+        <property name="file" value=".github\linters\mysuppressions.xml" />
     </module>
 
 
