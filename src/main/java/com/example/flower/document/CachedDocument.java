@@ -12,10 +12,10 @@ public class CachedDocument implements Document {
 
     @Override
     public String parse() {
-        String searchPath = this.wrappedDocument.gcsPath;
+        String searchPath = this.wrappedDocument.getGcsPath();
         String result;
-        try (Jedis jedis = new Jedis("localhost")) {
-            result = jedis.get(searchPath);
+        try (Jedis JEDIS = new Jedis(url)) {
+            result = JEDIS.get(searchPath);
         }
         if (result != null) {
             System.out.println("result found in db, returning value");

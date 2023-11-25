@@ -4,14 +4,14 @@ import com.example.flower.store.Item;
 public class ItemDecorator extends Item {
     private Item item;
 
-    public ItemDecorator(Item item){
+    public ItemDecorator(Item item) {
         this.item = item;
     }
-    public String getDescription(){
+    public String getDescription() {
         return item.getDescription();
     }
 
-    public double getPrice(){
+    public double getPrice() {
         return item.getPrice();
     }
 }

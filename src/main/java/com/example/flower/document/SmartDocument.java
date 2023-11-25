@@ -10,6 +10,7 @@ import com.google.cloud.vision.v1.ImageAnnotatorClient;
 import com.google.cloud.vision.v1.ImageSource;
 import com.google.cloud.vision.v1.TextAnnotation;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.SneakyThrows;
 import redis.clients.jedis.Jedis;
 
@@ -17,13 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
+@Getter
 public class SmartDocument implements Document {
-    public String gcsPath;
+    private String gcsPath;
 
-    public void SaveToDB(String somePath, String text) {
-        try (Jedis jedis = new Jedis("localhost")) {
+    public void saveToDB(String somePath, String text) {
+        try (Jedis JEDIS = new Jedis("localhost")) {
             System.out.println("adding to database");
-            jedis.set(somePath, text);
+            JEDIS.set(somePath, text);
         }
     }
 
@@ -31,25 +33,31 @@ public class SmartDocument implements Document {
     public String parse() {
         List<AnnotateImageRequest> requests = new ArrayList<>();
 
-        ImageSource imgSource = ImageSource.newBuilder().setGcsImageUri(gcsPath).build();
-        Image img = Image.newBuilder().setSource(imgSource).build();
-        Feature feat = Feature.newBuilder().setType(Type.DOCUMENT_TEXT_DETECTION).build();
-        AnnotateImageRequest request = AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
+        ImageSource imgSource = ImageSource.newBuilder()
+                        .setGcsImageUri(gcsPath).build();
+        Image img = Image.newBuilder()
+                        .setSource(imgSource).build();
+        Feature feat = Feature.newBuilder()
+                        .setType(Type.DOCUMENT_TEXT_DETECTION).build();
+        AnnotateImageRequest request = AnnotateImageRequest.newBuilder()
+                                .addFeatures(feat).setImage(img).build();
         requests.add(request);
 
-        try (ImageAnnotatorClient client = ImageAnnotatorClient.create()) {
-            BatchAnnotateImagesResponse response = client.batchAnnotateImages(requests);
-            List<AnnotateImageResponse> responses = response.getResponsesList();
-            client.close();
+        try (ImageAnnotatorClient CLIENT = ImageAnnotatorClient.create()) {
+            BatchAnnotateImagesResponse response = 
+                                CLIENT.batchAnnotateImages(requests);
+            List<AnnotateImageResponse> responses = 
+                                response.getResponsesList();
+            CLIENT.close();
 
             for (AnnotateImageResponse res : responses) {
                 TextAnnotation annotation = res.getFullTextAnnotation();
                 String text = annotation.getText();
-                SaveToDB(gcsPath, text);
+                saveToDB(gcsPath, text);
                 return text;
             }
         }
-        SaveToDB(gcsPath, "");
+        saveToDB(gcsPath, "");
         return "";
     }
 }

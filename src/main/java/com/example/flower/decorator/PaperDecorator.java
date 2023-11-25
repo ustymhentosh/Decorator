@@ -3,7 +3,7 @@ import com.example.flower.store.Item;
 
 
 public class PaperDecorator extends ItemDecorator {
-    public PaperDecorator(Item item){
+    public PaperDecorator(Item item) {
         super(item);
     }
 

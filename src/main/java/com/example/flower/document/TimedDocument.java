@@ -16,7 +16,8 @@ public class TimedDocument implements Document {
         long endTime = System.nanoTime();
         long elapsedTime = endTime - startTime;
 
-        System.out.println("Time taken to execute parse(): " + elapsedTime / 1000000 + " miliseconds");
+        System.out.println("Time taken to execute parse(): " 
+                + elapsedTime / 1000000 + " miliseconds");
 
         return result;
     }
