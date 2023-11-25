@@ -1,21 +1,20 @@
 package com.example.flower.decorator;
-
 import com.example.flower.store.Item;
 
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-public class PaperDecorator extends Decorator {
-    private Item item;
+public class PaperDecorator extends ItemDecorator {
+    public PaperDecorator(Item item){
+        super(item);
+    }
 
     @Override
-    void getDescription() {
-        System.out.println("Paper");
+    public String getDescription() {
+        return super.getDescription() + " Paper";
     }
 
     public double getPrice() {
         final int THIRTEEN = 13;
-        return THIRTEEN + item.getPrice();
+        return THIRTEEN + super.getPrice();
     }
     
 }

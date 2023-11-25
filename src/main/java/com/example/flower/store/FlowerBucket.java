@@ -20,4 +20,13 @@ public class FlowerBucket extends Item {
     public void addFlowerPack(FlowerPack flowerPack) {
         flowerPacks.add(flowerPack);
     }
+
+    @Override
+    public String getDescription() {
+        String descr = "";
+        for (FlowerPack flowerPack : flowerPacks) {
+            descr += flowerPack.toString();
+        }
+        return descr;
+    }
 }

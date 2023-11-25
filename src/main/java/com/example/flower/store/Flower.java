@@ -12,13 +12,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Flower {
+public class Flower extends Item{
     @Id
     private int id;
     private double sepalLength;
     private FlowerColor color;
     private double price;
     private FlowerType flowerType;
+    private String description;
 
     public Flower(Flower flower) {
         this.flowerType = flower.flowerType;

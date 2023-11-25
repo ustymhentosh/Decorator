@@ -1,20 +1,19 @@
 package com.example.flower.decorator;
 
 import com.example.flower.store.Item;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-public class RibbonDecorator extends Decorator {
-    private Item item;
+public class RibbonDecorator extends ItemDecorator {
+    public RibbonDecorator(Item item) {
+        super(item);
+    }
 
     @Override
-    void getDescription() {
-        System.out.println("Ribbon");
+    public String getDescription() {
+        return super.getDescription() + " Ribbon";
     }
 
     public double getPrice() {
         final int FORTY = 40;
-        return FORTY + item.getPrice();
-    }
-    
+        return FORTY + super.getPrice();
+    } 
 }

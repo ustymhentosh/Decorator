@@ -1,5 +1,6 @@
 package com.example.demo;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -34,3 +35,4 @@ public class FlowerTest {
         Assertions.assertEquals("#FF0000", flower.getColor());
     }
 }
+
